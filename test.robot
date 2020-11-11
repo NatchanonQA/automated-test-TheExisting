@@ -11,8 +11,8 @@ ${username}     natchanon1107
 ${password}     123456
 ${wrong_password}    123455
 ${email}        natchanon.ak@gmail.com
-${sumit_register_btn}    xpath=//button[text()='สมัครสมาชิก']
-${sumit_login_btn}      xpath=//button[text()='เข้าสู่ระบบ']
+${submit_register_btn}    xpath=//button[text()='สมัครสมาชิก']
+${submit_login_btn}      xpath=//button[text()='เข้าสู่ระบบ']
 
 *** Keywords ***
 Open website
@@ -41,12 +41,12 @@ Input password in login page
 Input wrong password in login page
     Wait Until Element Is Visible      id=login-password
     Input Text      id=login-password       ${wrong_password}
-Sumit register
-    Wait Until Element Is Visible    ${sumit_register_btn}
-    Click Element      ${sumit_register_btn}    
-Sumit login
-    Wait Until Element Is Visible   ${sumit_login_btn}
-    Click Element      ${sumit_login_btn}
+Submit register
+    Wait Until Element Is Visible    ${submit_register_btn}
+    Click Element      ${submit_register_btn}    
+Submit login
+    Wait Until Element Is Visible   ${submit_login_btn}     10
+    Click Element      ${submit_login_btn}
 Vaild login 
     Wait Until Element Is Visible    xpath=//img[@alt='profile-image']
     
@@ -58,7 +58,7 @@ Cannot register with existing account
     Input username in register page
     Input password in register page
     Input email in register page
-    Sumit register
+    Submit register
     Wait Until Element Is Visible    xpath=//*[text()='ชื่อนี้มีอยู่ในระบบแล้ว กรุณาเลือกชื่อใหม่']
 Cannot register with empty username
     Open website
@@ -66,7 +66,7 @@ Cannot register with empty username
     Click register button
     Input password in register page
     Input email in register page
-    Sumit register
+    Submit register
     Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ ชื่อผู้ใช้']
 Cannot register with empty password
     Open website
@@ -74,7 +74,7 @@ Cannot register with empty password
     Click register button
     Input username in register page
     Input email in register page
-    Sumit register
+    Submit register
     Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ รหัสผ่าน']
 Cannot register with empty email
     Open website
@@ -82,19 +82,19 @@ Cannot register with empty email
     Click register button
     Input username in register page
     Input password in register page
-    Sumit register
+    Submit register
     Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ อีเมล']
 Login with correct account and password
     Open website
     Click login button
     Input username in login page
     Input password in login page
-    Sumit login
+    Submit login
     Vaild login
 Cannot login with wrong password
     Open website
     Click login button
     Input username in login page
     Input wrong password in login page
-    Sumit login
+    Submit login
     Wait Until Element Is Visible    xpath=//*[text()='ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']
