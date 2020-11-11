@@ -1,5 +1,6 @@
 *** Settings ***
 Library    Selenium2Library
+Test Teardown   Close Browser
 
 *** Variables ***
 ${browser}    chrome
@@ -8,8 +9,10 @@ ${login_btn}     xpath=//*[text()='เข้าสู่ระบบ']
 ${register_btn}     xpath=//*[text()='สมัครสมาชิก']
 ${username}     natchanon1107
 ${password}     123456
+${wrong_password}    123455
 ${email}        natchanon.ak@gmail.com
 ${sumit_register_btn}    xpath=//button[text()='สมัครสมาชิก']
+${sumit_login_btn}      xpath=//button[text()='เข้าสู่ระบบ']
 
 *** Keywords ***
 Open website
@@ -28,11 +31,25 @@ Input password in register page
     Input Text      name=root_password-name       ${password}
 Input email in register page
     Wait Until Element Is Visible      name=root_email-name
-    Input Text      name=root_email-name          ${email}            
+    Input Text      name=root_email-name       ${email}
+Input username in login page
+    Wait Until Element Is Visible      id=login-username
+    Input Text      id=login-username       ${username}
+Input password in login page
+    Wait Until Element Is Visible      id=login-password
+    Input Text      id=login-password       ${password}
+Input wrong password in login page
+    Wait Until Element Is Visible      id=login-password
+    Input Text      id=login-password       ${wrong_password}
 Sumit register
     Wait Until Element Is Visible    ${sumit_register_btn}
-    Click Element      ${sumit_register_btn}  
-
+    Click Element      ${sumit_register_btn}    
+Sumit login
+    Wait Until Element Is Visible   ${sumit_login_btn}
+    Click Element      ${sumit_login_btn}
+Vaild login 
+    Wait Until Element Is Visible    xpath=//img[@alt='profile-image']
+    
 *** Test Cases ***
 Cannot register with existing account
     Open website
@@ -67,4 +84,17 @@ Cannot register with empty email
     Input password in register page
     Sumit register
     Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ อีเมล']
-  
+Login with correct account and password
+    Open website
+    Click login button
+    Input username in login page
+    Input password in login page
+    Sumit login
+    Vaild login
+Cannot login with wrong password
+    Open website
+    Click login button
+    Input username in login page
+    Input wrong password in login page
+    Sumit login
+    Wait Until Element Is Visible    xpath=//*[text()='ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง']
