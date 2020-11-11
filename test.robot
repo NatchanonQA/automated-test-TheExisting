@@ -43,4 +43,28 @@ Cannot register with existing account
     Input email in register page
     Sumit register
     Wait Until Element Is Visible    xpath=//*[text()='ชื่อนี้มีอยู่ในระบบแล้ว กรุณาเลือกชื่อใหม่']
+Cannot register with empty username
+    Open website
+    Click login button
+    Click register button
+    Input password in register page
+    Input email in register page
+    Sumit register
+    Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ ชื่อผู้ใช้']
+Cannot register with empty password
+    Open website
+    Click login button
+    Click register button
+    Input username in register page
+    Input email in register page
+    Sumit register
+    Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ รหัสผ่าน']
+Cannot register with empty email
+    Open website
+    Click login button
+    Click register button
+    Input username in register page
+    Input password in register page
+    Sumit register
+    Wait Until Element Is Visible    xpath=//*[text()='โปรดระบุ อีเมล']
   
